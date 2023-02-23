@@ -6,7 +6,9 @@ function PageLayout() {
 	return (
 		<>
 			<Header />
-			<Outlet />
+			<div className="wrapper">
+				<Outlet />
+			</div>
 			<Footer />
 		</>
 	);

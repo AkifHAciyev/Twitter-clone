@@ -1,0 +1,119 @@
+.wrapper {
+	display: flex;
+	justify-content: center;
+	background-color: #fff;
+	position: fixed;
+	width: 100%;
+	left: 0;
+}
+
+.container {
+	max-width: 1440px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px 72px;
+	height: 68px;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+}
+
+.logoName {
+	font-family: 'Poppins';
+	font-weight: 600;
+	font-size: 18px;
+	color: #333333;
+}
+
+.ul {
+	display: flex;
+}
+
+.li:not(:first-child) {
+	margin-left: 80px;
+}
+
+.link {
+	font-family: 'Poppins';
+	font-weight: 500;
+	font-size: 16px;
+	color: #828282;
+}
+
+.link:hover {
+	color: #2f80ed;
+	border-bottom: 3px solid #2f80ed;
+	padding-bottom: 21px;
+}
+
+.user {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.user img {
+	height: 32px;
+	width: 32px;
+}
+
+.userName {
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	color: #333333;
+	margin-left: 11px;
+}
+
+.usernav {
+	margin-top: 20px;
+	position: absolute;
+	width: 162px;
+	background-color: #fff;
+	padding: 15px;
+	border: 1px solid #e0e0e0;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+	border-radius: 12px;
+}
+
+.userli {
+	padding: 10px;
+	color: #4f4f4f;
+}
+
+.userli:hover {
+	background-color: #f2f2f2;
+	border-radius: 8px;
+}
+
+.userli:not(:first-child) {
+	margin-top: 10px;
+}
+
+.userli:last-child {
+	border-top: 1px solid #e0e0e0;
+}
+
+.userli:last-child .userlink {
+	color: #eb5757;
+}
+
+.userlink {
+	font-family: 'Noto Sans';
+	font-weight: 500;
+	font-size: 14px;
+	color: #4f4f4f;
+	display: flex;
+	align-items: center;
+}
+
+.userlink img {
+	margin-right: 12px;
+	height: 16.67px;
+	width: 16.67px;
+}
