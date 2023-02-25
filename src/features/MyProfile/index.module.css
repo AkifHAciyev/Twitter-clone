@@ -1,0 +1,106 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.userAvo {
+	position: relative;
+	height: 588px;
+	object-fit: cover;
+}
+
+.userInfo {
+	position: absolute;
+	top: -64px;
+	max-width: 1073px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	background: #ffffff;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+	border-radius: 12px;
+	padding: 24px 24px 24px 200px;
+	position: relative;
+}
+
+.userInfoImg {
+	height: 132px;
+	width: 132px;
+	position: absolute;
+	top: -44px;
+	left: 24px;
+	border-radius: 8px;
+}
+
+.userInfo button img {
+	height: 13px;
+	width: 13px;
+	margin-right: 5px;
+}
+
+.center {
+	display: flex;
+	flex-direction: column;
+}
+
+.center div {
+	display: flex;
+	margin-bottom: 23px;
+}
+
+.name {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 36px;
+	color: #333333;
+	margin-right: 26px;
+}
+
+.follor span {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 18px;
+	color: #333333;
+}
+
+.follor {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 18px;
+	color: #bdbdbd;
+}
+
+.follor:not(:first-child) {
+	margin-left: 16px;
+}
+
+.center p {
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 25px;
+	color: #828282;
+}
+
+.userInfo button {
+	display: flex;
+	align-items: center;
+	background: #2f80ed;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	color: #ffffff;
+	padding: 8px;
+}

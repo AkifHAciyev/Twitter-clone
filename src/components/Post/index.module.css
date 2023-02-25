@@ -1,0 +1,242 @@
+.wrapper {
+	background: #ffffff;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+	border-radius: 8px;
+	max-width: 745px;
+	width: 100%;
+	margin-top: 25px;
+	padding: 20px;
+}
+
+.user {
+	display: flex;
+}
+
+.user img {
+	height: 40px;
+	width: 40px;
+	margin-right: 18px;
+	margin-bottom: 22px;
+}
+
+.name {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.date {
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 16px;
+	color: #bdbdbd;
+}
+
+.tweetText {
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 22px;
+	color: #4f4f4f;
+	margin-bottom: 20px;
+}
+
+.tweetImg {
+	max-width: 705px;
+	width: 100%;
+	border-radius: 8px;
+	margin-bottom: 13px;
+}
+
+.info {
+	display: flex;
+	justify-content: end;
+	border-bottom: 1px solid #f2f2f2;
+	padding-bottom: 5px;
+}
+
+.info span {
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 16px;
+	letter-spacing: -0.035em;
+	color: #bdbdbd;
+}
+
+.info span:not(:first-child) {
+	margin-left: 16px;
+}
+
+.userActions {
+	display: flex;
+	justify-content: space-around;
+}
+
+.userActions button {
+	display: flex;
+	background-color: #fff;
+	border: none;
+	cursor: pointer;
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 19px;
+	padding: 10px 20px;
+}
+
+.userActions button img {
+	height: 16px;
+	width: 16px;
+	margin-right: 12px;
+}
+
+.userActions button:hover {
+	background: #f2f2f2;
+	padding: 10px 20px;
+	border-radius: 8px;
+}
+
+.form {
+	display: flex;
+}
+
+.form img {
+	height: 40px;
+	width: 40px;
+	margin-right: 16px;
+}
+
+.form input {
+	outline: none;
+	padding: 10px;
+	max-width: 648px;
+	width: 100%;
+	background: #fafafa;
+	border: 1px solid #f2f2f2;
+	border-radius: 8px;
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 19px;
+	color: #bdbdbd;
+	border: none;
+}
+
+.form input::placeholder {
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 19px;
+	color: #bdbdbd;
+	border: none;
+}
+
+.form button {
+	position: relative;
+	left: -35px;
+	width: 15px;
+	height: 15px;
+	border: none;
+	background-color: #fff;
+	margin: auto 0;
+	cursor: pointer;
+}
+
+.form button img {
+	height: 15px;
+	width: 15px;
+}
+
+.comment {
+	border-top: 1px solid #f2f2f2;
+	padding-top: 15px;
+	margin-top: 30px;
+}
+
+.commentTitle {
+	display: flex;
+}
+
+.commentTitle img {
+	height: 45px;
+	width: 45px;
+	margin-right: 10px;
+}
+
+.commentSection {
+	background: #fafafa;
+	border-radius: 8px;
+	padding: 10px;
+}
+
+.commentSectionName {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 21px;
+	color: #000000;
+	margin-bottom: 10px;
+}
+
+.commentSectionName span {
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 16px;
+	color: #bdbdbd;
+	margin-left: 8px;
+}
+
+.commentSectionText {
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 22px;
+	letter-spacing: -0.035em;
+	color: #4f4f4f;
+}
+
+.likes {
+	display: flex;
+	align-items: center;
+	margin-left: 60px;
+	margin-top: 6px;
+}
+
+.likes img {
+	height: 13px;
+	width: 13px;
+	margin-right: 5px;
+}
+
+.likes span {
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 16px;
+	color: #bdbdbd;
+	margin-right: 20px;
+}
+
+.likes p {
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 16px;
+	color: #bdbdbd;
+}

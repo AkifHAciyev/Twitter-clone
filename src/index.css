@@ -4,7 +4,7 @@
 }
 
 @font-face {
-	font-family: 'NotoSans';
+	font-family: 'Noto Sans';
 	src: url(./assets/fonts/NotoSans-Medium.ttf) format('opentype');
 }
 
@@ -16,4 +16,9 @@
 	max-width: 1440px;
 	width: 100%;
 	margin: 0 auto;
+	padding-top: 72px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 40px;
 }

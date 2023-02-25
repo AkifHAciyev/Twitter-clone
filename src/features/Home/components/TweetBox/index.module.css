@@ -1,0 +1,105 @@
+.wrapper {
+	background: #ffffff;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+	border-radius: 12px;
+	max-width: 745px;
+	width: 100%;
+}
+
+.userImg {
+	width: 40px;
+	height: 45px;
+	margin-right: 12px;
+}
+
+.formBox {
+	display: flex;
+	padding: 12px;
+}
+
+.fromIconsImg {
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+
+.fromIconsImg:not(:first-child) {
+	margin-left: 13px;
+}
+.formIconsText {
+	margin-left: 13px;
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	color: #2f80ed;
+	cursor: pointer;
+}
+
+.formdiv {
+	display: flex;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.input {
+	outline: none;
+	border: none;
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 22px;
+	color: #bdbdbd;
+}
+
+.input::placeholder {
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 22px;
+	color: #bdbdbd;
+}
+
+.form {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+
+.fromIconsbox {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex: 1;
+	margin-left: 50px;
+}
+
+.fromIcons {
+	display: flex;
+}
+
+.button {
+	background: #2f80ed;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	color: #ffffff;
+	padding: 8px 24px;
+}
+
+.title {
+	margin: 20px 20px 0;
+	padding: 10px 0;
+	border-bottom: 1px solid #e0e0e0;
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 12px;
+	color: #4f4f4f;
+}

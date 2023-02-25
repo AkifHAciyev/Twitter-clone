@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from './index.module.css';
 import twitter from '../../assets/icons/twitterLogo.svg';
@@ -15,13 +15,21 @@ const Header = () => {
 		paddingBottom: '21px',
 	};
 
+	useEffect(() => {
+		if (dropDown) {
+			setTimeout(() => {
+				setDropDown((e) => !e);
+			}, 5000);
+		}
+	}, [dropDown]);
+
 	return (
 		<div className={styled.wrapper}>
 			<div className={styled.container}>
-				<div className={styled.logo}>
+				<NavLink to="/" className={styled.logo}>
 					<img src={twitter} alt="twitter" />
 					<p className={styled.logoName}>Twitter</p>
-				</div>
+				</NavLink>
 				<nav className={styled.nav}>
 					<ul className={styled.ul}>
 						<li className={styled.li}>
@@ -49,7 +57,7 @@ const Header = () => {
 						</li>
 					</ul>
 				</nav>
-				<div className={styled.userWrapper} onClick={(e) => setDropDown(!dropDown)}>
+				<div className={styled.userWrapper} onClick={() => setDropDown(!dropDown)}>
 					<div className={styled.user}>
 						<div className={styled.userImg}>
 							<img src={user} alt="user" />
@@ -60,7 +68,7 @@ const Header = () => {
 						<nav className={styled.usernav}>
 							<ul className={styled.userul}>
 								<li className={styled.userli}>
-									<NavLink className={styled.userlink} to="/">
+									<NavLink className={styled.userlink} to="/my-profile">
 										<img src={userIcon} alt="" />
 										My Profile
 									</NavLink>
@@ -72,7 +80,7 @@ const Header = () => {
 									</NavLink>
 								</li>
 								<li className={styled.userli}>
-									<NavLink className={styled.userlink} to="/bookmarks">
+									<NavLink className={styled.userlink} to="/login">
 										<img src={logout} alt="" />
 										Logout
 									</NavLink>
