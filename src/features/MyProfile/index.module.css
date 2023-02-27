@@ -34,8 +34,8 @@
 }
 
 .userInfo button img {
-	height: 13px;
-	width: 13px;
+	height: 20px;
+	width: 20px;
 	margin-right: 5px;
 }
 
@@ -46,6 +46,7 @@
 
 .center div {
 	display: flex;
+	align-items: center;
 	margin-bottom: 23px;
 }
 
@@ -71,7 +72,7 @@
 .follor {
 	font-family: 'Poppins';
 	font-style: normal;
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 12px;
 	line-height: 18px;
 	color: #bdbdbd;
@@ -81,12 +82,14 @@
 	margin-left: 16px;
 }
 
-.center p {
+.text {
 	font-family: 'Noto Sans';
 	font-style: normal;
 	font-weight: 500;
 	font-size: 18px;
 	line-height: 25px;
+	letter-spacing: -0.035em;
+
 	color: #828282;
 }
 
