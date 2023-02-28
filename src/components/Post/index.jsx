@@ -32,16 +32,16 @@ const Post = () => {
 			</div>
 			<div className={styled.userActions}>
 				<button>
-					<img src={comment} alt="comment" /> Comment
+					<img src={comment} alt="comment" /> <span>Comment</span>
 				</button>
 				<button>
-					<img src={refresh} alt="Retweeted" /> Retweeted
+					<img src={refresh} alt="Retweeted" /> <span>Retweeted</span>
 				</button>
 				<button>
-					<img src={heart} alt="Liked" /> Liked
+					<img src={heart} alt="Liked" /> <span>Liked</span>
 				</button>
 				<button>
-					<img src={save} alt="saved" /> Saved
+					<img src={save} alt="saved" /> <span>Saved</span>
 				</button>
 			</div>
 			<form className={styled.form}>

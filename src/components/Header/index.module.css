@@ -117,3 +117,20 @@
 	height: 16.67px;
 	width: 16.67px;
 }
+
+@media screen and (max-width: 800px) {
+	.container {
+		padding: 20px 25px;
+	}
+	.nav {
+		display: none;
+	}
+
+	.userName {
+		display: none;
+	}
+
+	.usernav {
+		right: 0;
+	}
+}

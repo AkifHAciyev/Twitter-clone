@@ -81,6 +81,8 @@
 
 .userActions button {
 	display: flex;
+	align-items: center;
+	justify-content: center;
 	background-color: #fff;
 	border: none;
 	cursor: pointer;
@@ -239,4 +241,10 @@
 	font-size: 12px;
 	line-height: 16px;
 	color: #bdbdbd;
+}
+
+@media screen and (max-width: 525px) {
+	.userActions button span {
+		display: none;
+	}
 }
