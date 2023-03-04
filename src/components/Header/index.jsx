@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from './index.module.css';
 import twitter from '../../assets/icons/twitterLogo.svg';
@@ -6,6 +6,7 @@ import user from '../../assets/images/user.jpg';
 import userIcon from '../../assets/icons/userIcon.png';
 import people from '../../assets/icons/people.png';
 import logout from '../../assets/icons/logout.png';
+import Button from '@mui/material/Button';
 
 const Header = () => {
 	const [dropDown, setDropDown] = useState(false);
@@ -15,13 +16,8 @@ const Header = () => {
 		paddingBottom: '21px',
 	};
 
-	useEffect(() => {
-		if (dropDown) {
-			setTimeout(() => {
-				setDropDown((e) => !e);
-			}, 5000);
-		}
-	}, [dropDown]);
+	const isAuth = false;
+	const onClickLogout = () => {};
 
 	return (
 		<div className={styled.wrapper}>
@@ -57,38 +53,49 @@ const Header = () => {
 						</li>
 					</ul>
 				</nav>
-				<div className={styled.userWrapper} onClick={() => setDropDown(!dropDown)}>
-					<div className={styled.user}>
-						<div className={styled.userImg}>
-							<img src={user} alt="user" />
+				{isAuth ? (
+					<div className={styled.userWrapper} onClick={() => setDropDown(!dropDown)}>
+						<div className={styled.user}>
+							<div className={styled.userImg}>
+								<img src={user} alt="user" />
+							</div>
+							<p className={styled.userName}>Xanthe Neal</p>
 						</div>
-						<p className={styled.userName}>Xanthe Neal</p>
+						{dropDown && (
+							<nav className={styled.usernav}>
+								<ul className={styled.userul}>
+									<li className={styled.userli}>
+										<NavLink className={styled.userlink} to="/my-profile">
+											<img src={userIcon} alt="" />
+											My Profile
+										</NavLink>
+									</li>
+									<li className={styled.userli}>
+										<NavLink className={styled.userlink} to="/explore">
+											<img src={people} alt="" />
+											Group Chat
+										</NavLink>
+									</li>
+									<li className={styled.userli}>
+										<NavLink onClick={onClickLogout} className={styled.userlink} to="/login">
+											<img src={logout} alt="" />
+											Logout
+										</NavLink>
+									</li>
+								</ul>
+							</nav>
+						)}
 					</div>
-					{dropDown && (
-						<nav className={styled.usernav}>
-							<ul className={styled.userul}>
-								<li className={styled.userli}>
-									<NavLink className={styled.userlink} to="/my-profile">
-										<img src={userIcon} alt="" />
-										My Profile
-									</NavLink>
-								</li>
-								<li className={styled.userli}>
-									<NavLink className={styled.userlink} to="/explore">
-										<img src={people} alt="" />
-										Group Chat
-									</NavLink>
-								</li>
-								<li className={styled.userli}>
-									<NavLink className={styled.userlink} to="/login">
-										<img src={logout} alt="" />
-										Logout
-									</NavLink>
-								</li>
-							</ul>
-						</nav>
-					)}
-				</div>
+				) : (
+					<>
+						<NavLink to="/login">
+							<Button variant="outlined">Log In </Button>
+						</NavLink>
+						<NavLink to="/register">
+							<Button variant="contained">Register</Button>
+						</NavLink>
+					</>
+				)}
 			</div>
 		</div>
 	);

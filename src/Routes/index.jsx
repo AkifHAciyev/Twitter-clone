@@ -7,6 +7,7 @@ import HomePage from '../pages/Home';
 import LoginPage from '../pages/Login';
 import MyProfilePage from '../pages/MyProfile';
 import NotFound from '../pages/NotFound';
+import RegistrationPage from '../pages/Registration';
 
 const PageRoutes = () => {
 	return (
@@ -19,6 +20,7 @@ const PageRoutes = () => {
 				<Route path="*" element={<NotFound />} />
 			</Route>
 			<Route path="/login" element={<LoginPage />} />
+			<Route path="/register" element={<RegistrationPage />} />
 		</Routes>
 	);
 };
