@@ -14,14 +14,14 @@ const Bookmarks = () => {
 	}, []);
 	return (
 		<div>
-			{(isPostsLoading ? [...Array(5)] : posts.items).map((obj, index) =>
+			{(isPostsLoading ? [...Array(5)] : [...posts.items].reverse()).map((obj, index) =>
 				isPostsLoading ? (
 					<Post key={index} isLoading={true} />
 				) : (
 					<Post
 						key={obj._id}
 						text={obj.text}
-						imageUrl={obj.imageUrl}
+						imageUrl={`http://localhost:8080${obj.imageUrl}`}
 						user={obj.user}
 						createdAt={obj.createdAt}
 						comentCount={obj.comentCount}
