@@ -26,6 +26,7 @@ const Home = () => {
 						key={obj._id}
 						text={obj.text}
 						imageUrl={`http://localhost:8080${obj.imageUrl}`}
+						avatarUrl={`http://localhost:8080${obj.user.avatarUrl}`}
 						user={obj.user}
 						createdAt={obj.createdAt}
 						comentCount={obj.comentCount}

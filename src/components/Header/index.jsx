@@ -4,11 +4,10 @@ import styled from './index.module.css';
 import twitter from '../../assets/icons/twitterLogo.svg';
 import user from '../../assets/images/user.jpg';
 import userIcon from '../../assets/icons/userIcon.png';
-import people from '../../assets/icons/people.png';
 import logoutImg from '../../assets/icons/logout.png';
 import Button from '@mui/material/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, selectIsAuth } from '../../redux/slices/auth';
+import { logout, selectIsAuth, selectIsAuthMe } from '../../redux/slices/auth';
 
 const Header = () => {
 	const [dropDown, setDropDown] = useState(false);
@@ -19,10 +18,11 @@ const Header = () => {
 	};
 
 	const isAuth = useSelector(selectIsAuth);
-	const dispath = useDispatch();
+	const dispatch = useDispatch();
+	const userData = useSelector(selectIsAuthMe);
 
 	const onClickLogout = () => {
-		dispath(logout());
+		dispatch(logout());
 		window.localStorage.removeItem('token');
 	};
 
@@ -68,9 +68,12 @@ const Header = () => {
 					<div className={styled.userWrapper} onClick={() => setDropDown(!dropDown)}>
 						<div className={styled.user}>
 							<div className={styled.userImg}>
-								<img src={user} alt="user" />
+								<img
+									src={userData.avatarUrl.length > 0 ? `http://localhost:8080${userData.avatarUrl}` : user}
+									alt="user"
+								/>
 							</div>
-							<p className={styled.userName}>Xanthe Neal</p>
+							<p className={styled.userName}>{userData.fullName}</p>
 						</div>
 						{dropDown && (
 							<nav className={styled.usernav}>
@@ -81,14 +84,8 @@ const Header = () => {
 											My Profile
 										</NavLink>
 									</li>
-									<li className={styled.userli}>
-										<NavLink className={styled.userlink} to="/explore">
-											<img src={people} alt="" />
-											Group Chat
-										</NavLink>
-									</li>
 									<li className={styled.userli} onClick={onClickLogout}>
-										<NavLink onClick={onClickLogout} className={styled.userlink}>
+										<NavLink onClick={onClickLogout} className={styled.userlink} to="/">
 											<img className={styled.userlink} src={logoutImg} alt="" />
 											Logout
 										</NavLink>

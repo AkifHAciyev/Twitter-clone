@@ -10,7 +10,18 @@ import { PostSkeleton } from './Skeleton';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from '../../redux/slices/auth';
 
-const Post = ({ text, imageUrl, user, createdAt, comentCount, retweetsCount, savedCount, isFullPost, isLoading }) => {
+const Post = ({
+	text,
+	avatarUrl,
+	imageUrl,
+	user,
+	createdAt,
+	comentCount,
+	retweetsCount,
+	savedCount,
+	isFullPost,
+	isLoading,
+}) => {
 	if (isLoading) {
 		return <PostSkeleton />;
 	}
@@ -22,7 +33,7 @@ const Post = ({ text, imageUrl, user, createdAt, comentCount, retweetsCount, sav
 	return (
 		<div className={styled.wrapper}>
 			<div className={styled.user}>
-				<img src={usera} alt="user" />
+				<img src={avatarUrl.length > 21 ? avatarUrl : usera} alt="user" />
 				<div className={styled.userName}>
 					{isFullPost ? title : <p className={styled.name}>{user.fullName}</p>}
 					<p className={styled.date}>{formattedDate}</p>
@@ -30,8 +41,10 @@ const Post = ({ text, imageUrl, user, createdAt, comentCount, retweetsCount, sav
 			</div>
 			<div className={styled.tweet}>
 				<p className={styled.tweetText}>{text}</p>
-				{imageUrl == 'http://localhost:8080undefined' ? null : (
-					<img className={styled.tweetImg} src={imageUrl} alt="#" />
+				{imageUrl == ('http://localhost:8080undefined' || 'http://localhost:8080') ? (
+					<p></p>
+				) : (
+					<img className={styled.tweetImg} src={imageUrl} alt={imageUrl.slice(30, 45)} />
 				)}
 			</div>
 			<div className={styled.info}>

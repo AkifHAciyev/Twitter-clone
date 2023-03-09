@@ -1,14 +1,16 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import axios from '../../../../axios.js';
 import styled from './index.module.css';
 import user from '../../../../assets/images/user.jpg';
 import photo from '../../../../assets/icons/photo.png';
-import globe from '../../../../assets/icons/globe.png';
+import { selectIsAuthMe } from '../../../../redux/slices/auth.js';
+import { useSelector } from 'react-redux';
 
 const TweetBox = () => {
 	const [text, setText] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	const inputRef = useRef(null);
+	const userData = useSelector(selectIsAuthMe);
 
 	const handleChangeFile = async (e) => {
 		try {
@@ -22,7 +24,6 @@ const TweetBox = () => {
 			alert('image is not send');
 		}
 	};
-	console.log(imageUrl);
 
 	const onSubmit = async () => {
 		try {
@@ -43,7 +44,7 @@ const TweetBox = () => {
 			<div className={styled.formBox}>
 				<form className={styled.form}>
 					<div className={styled.formdiv}>
-						<img className={styled.userImg} src={user} alt="user" />
+						<img className={styled.userImg} src={`http://localhost:8080${userData.avatarUrl}`} alt="user" />
 						<img src={imageUrl} alt="" />
 						<input ref={inputRef} type="file" onChange={handleChangeFile} hidden />
 						<input

@@ -15,7 +15,6 @@ const style = {
 	boxShadow: 24,
 	p: 4,
 	bgcolor: '#FFFFFF',
-	boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.05)',
 	borderRadius: '8px',
 };
 
@@ -37,7 +36,6 @@ const FollowModal = ({ handleClose }) => {
 							<div className={styled.left}>
 								<img className={styled.userInfoImg} src={user} alt="#" />
 								<div>
-									{' '}
 									<p className={styled.name}>Daniel Jensen</p>
 									<p className={styled.follor}>120k followers</p>
 								</div>

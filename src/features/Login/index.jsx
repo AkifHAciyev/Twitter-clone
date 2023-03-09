@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
@@ -12,6 +12,7 @@ import { Navigate } from 'react-router-dom';
 const Login = () => {
 	const isAuth = useSelector(selectIsAuth);
 	const dispatch = useDispatch();
+
 	const {
 		register,
 		handleSubmit,
