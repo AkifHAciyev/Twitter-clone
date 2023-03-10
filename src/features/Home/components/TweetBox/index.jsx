@@ -37,6 +37,7 @@ const TweetBox = () => {
 			alert('post is not create');
 		}
 	};
+	console.log(userData.avatarUrl);
 
 	return (
 		<div className={styled.wrapper}>
@@ -44,7 +45,15 @@ const TweetBox = () => {
 			<div className={styled.formBox}>
 				<form className={styled.form}>
 					<div className={styled.formdiv}>
-						<img className={styled.userImg} src={`http://localhost:8080${userData.avatarUrl}`} alt="user" />
+						{userData.avatarUrl == ('' || 'undefined') ? (
+							<img className={styled.userImg} src={user} alt="#" />
+						) : (
+							<img
+								className={styled.userImg}
+								src={`http://localhost:8080${userData.avatarUrl}`}
+								alt={imageUrl.slice(30, 45)}
+							/>
+						)}
 						<img src={imageUrl} alt="" />
 						<input ref={inputRef} type="file" onChange={handleChangeFile} hidden />
 						<input

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from './index.module.css';
 import usera from '../../assets/images/user.jpg';
 import comment from '../../assets/icons/comment.png';
@@ -8,23 +8,25 @@ import save from '../../assets/icons/save.png';
 import image from '../../assets/icons/image.png';
 import { PostSkeleton } from './Skeleton';
 import { useSelector } from 'react-redux';
-import { selectIsAuth } from '../../redux/slices/auth';
+import { selectIsAuth, selectIsAuthMe } from '../../redux/slices/auth';
+import axios from '../../axios';
 
-const Post = ({
-	text,
-	avatarUrl,
-	imageUrl,
-	user,
-	createdAt,
-	comentCount,
-	retweetsCount,
-	savedCount,
-	isFullPost,
-	isLoading,
-}) => {
+const Post = ({ postId, text, avatarUrl, imageUrl, user, createdAt, isFullPost, isLoading }) => {
 	if (isLoading) {
 		return <PostSkeleton />;
 	}
+	const [isSaved, setIsSaved] = useState(false);
+	const userData = useSelector(selectIsAuthMe);
+
+	const handleSaveClick = async () => {
+		try {
+			await axios.post(`/users/${userData._id}/save-post/${postId}`);
+			await axios.put(`/posts/${postId}`, { isSaved: !isSaved });
+			setIsSaved(!isSaved);
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	const formattedDate = createdAt.replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).*/, '$1 $2 $3 $4:$5:$6');
 
@@ -47,11 +49,6 @@ const Post = ({
 					<img className={styled.tweetImg} src={imageUrl} alt={imageUrl.slice(30, 45)} />
 				)}
 			</div>
-			<div className={styled.info}>
-				<span>{comentCount ? comentCount : 0} Comments</span>
-				<span>{retweetsCount ? retweetsCount : 0} Retweets</span>
-				<span>{savedCount ? savedCount : 0} Saved</span>
-			</div>
 			{isAuth && (
 				<>
 					<div className={styled.userActions}>
@@ -64,7 +61,7 @@ const Post = ({
 						<button>
 							<img src={heart} alt="Liked" /> <span>Liked</span>
 						</button>
-						<button>
+						<button onClick={handleSaveClick}>
 							<img src={save} alt="saved" /> <span>Saved</span>
 						</button>
 					</div>

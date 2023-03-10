@@ -48,14 +48,12 @@ const Explore = () => {
 				) : (
 					<Post
 						key={obj._id}
+						postId={obj._id}
 						text={obj.text}
 						imageUrl={`http://localhost:8080${obj.imageUrl}`}
-						user={obj.user}
 						avatarUrl={`http://localhost:8080${obj.user.avatarUrl}`}
+						user={obj.user}
 						createdAt={obj.createdAt}
-						comentCount={obj.comentCount}
-						retweetsCount={obj.retweetsCount}
-						savedCount={obj.savedCount}
 					/>
 				)
 			)}
