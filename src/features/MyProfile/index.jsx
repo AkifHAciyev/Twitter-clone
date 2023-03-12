@@ -8,27 +8,42 @@ import pen from '../../assets/icons/pen.png';
 import FollowModal from './compinents/FollowModal';
 import { fetchPosts } from '../../redux/slices/post';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsAuthMe } from '../../redux/slices/auth';
+import { fetchAuthMe, selectIsAuthMe } from '../../redux/slices/auth';
 import axios from '../../axios';
 
 const MyProfile = () => {
 	const [open, setOpen] = useState(false);
 	const [avatarUrl, setAvatarUrl] = useState('');
 	const [coverUrl, setCoverUrl] = useState('');
+	const [bio, setBio] = useState('');
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	const dispatch = useDispatch();
 	const { posts } = useSelector((state) => state.posts);
 	const userData = useSelector(selectIsAuthMe);
-	const inputRef = useRef(null);
+	const inputRefAvo = useRef(null);
+	const inputRefCover = useRef(null);
 
-	const handleChangeFile = async (e) => {
+	const handleChangeFileAvo = async (e) => {
 		try {
 			const formData = new FormData();
 			const file = e.target.files[0];
 			formData.append('image', file);
 			const { data } = await axios.post('/upload', formData);
 			setAvatarUrl(data.url);
+		} catch (err) {
+			console.warn(err);
+			console.log('image is not send');
+		}
+	};
+
+	const handleChangeFileCover = async (e) => {
+		try {
+			const formData = new FormData();
+			const file = e.target.files[0];
+			formData.append('image', file);
+			const { data } = await axios.post('/upload', formData);
+			console.log(data.url);
 			setCoverUrl(data.url);
 		} catch (err) {
 			console.warn(err);
@@ -36,12 +51,14 @@ const MyProfile = () => {
 		}
 	};
 
-	const updateUserCoverUrl = async () => {
+	const updateUserCoverUrl = async (e) => {
+		e.preventDefault();
 		try {
 			const response = await axios.put(`/users/${userData._id}/coverUrl`, {
 				coverUrl: coverUrl,
 			});
-
+			dispatch(fetchAuthMe(response));
+			dispatch(fetchPosts(response));
 			return response.data;
 		} catch (error) {
 			console.error(error);
@@ -49,12 +66,14 @@ const MyProfile = () => {
 		}
 	};
 
-	const updateUserAvatarUrl = async () => {
+	const updateUserAvatarUrl = async (e) => {
+		e.preventDefault();
 		try {
 			const response = await axios.put(`/users/${userData._id}/avatarUrl`, {
 				avatarUrl: avatarUrl,
 			});
-
+			dispatch(fetchPosts(response));
+			dispatch(fetchAuthMe(response));
 			return response.data;
 		} catch (error) {
 			console.error(error);
@@ -72,43 +91,43 @@ const MyProfile = () => {
 			<img
 				className={styled.userAvo}
 				src={
-					userData.coverUrl === undefined || 'http://localhost:8080'
+					!userData.coverUrl || userData.coverUrl == 'http://localhost:8080'
 						? cover
 						: `http://localhost:8080${userData.coverUrl}`
 				}
 				alt="#"
-				onClick={() => inputRef.current.click()}
+				onClick={() => inputRefCover.current.click()}
 			/>
-			<form>
+			<form onSubmit={updateUserCoverUrl}>
 				<img className={styled.pen} src={pen} alt="pen" />
-				<input ref={inputRef} type="file" onChange={handleChangeFile} hidden />
-				<button onClick={updateUserCoverUrl} className={styled.penBtn} type="submit"></button>
+				<input ref={inputRefCover} type="file" onChange={handleChangeFileCover} hidden />
+				<button className={styled.penBtn} type="submit"></button>
 			</form>
 
 			<div className={styled.userInfo}>
-				<form>
+				<form onSubmit={updateUserAvatarUrl}>
 					<img className={styled.penAvatar} src={pen} alt="pen" />
 					<img
 						className={styled.userInfoImg}
 						src={
-							userData.avatarUrl === undefined && 'http://localhost:8080'
+							!userData.avatarUrl || userData.avatarUrl == 'http://localhost:8080'
 								? user
 								: `http://localhost:8080${userData.avatarUrl}`
 						}
 						alt="#"
-						onClick={() => inputRef.current.click()}
+						onClick={() => inputRefAvo.current.click()}
 					/>
-					<input ref={inputRef} type="file" onChange={handleChangeFile} hidden />
-					<button onClick={updateUserAvatarUrl} className={styled.penAvatarBtn} type="submit"></button>
+					<input ref={inputRefAvo} type="file" onChange={handleChangeFileAvo} hidden />
+					<button className={styled.penAvatarBtn} type="submit"></button>
 				</form>
 				<div className={styled.center}>
 					<div>
 						<p className={styled.name}>{userData.fullName}</p>
 						<p className={styled.follor}>
-							<span>2,434 </span>Following
+							<span>{userData?.Following?.length} </span>Following
 						</p>
 						<p className={styled.follor}>
-							<span>5,434 </span>Followers
+							<span>{userData?.Followers?.length} </span>Followers
 						</p>
 					</div>
 					<p className={styled.text}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, iusto.</p>
@@ -127,14 +146,12 @@ const MyProfile = () => {
 				) : (
 					<Post
 						key={obj._id}
+						postId={obj._id}
 						text={obj.text}
 						imageUrl={`http://localhost:8080${obj.imageUrl}`}
-						user={obj.user}
 						avatarUrl={`http://localhost:8080${obj.user.avatarUrl}`}
+						user={obj.user}
 						createdAt={obj.createdAt}
-						comentCount={obj.comentCount}
-						retweetsCount={obj.retweetsCount}
-						savedCount={obj.savedCount}
 					/>
 				)
 			)}

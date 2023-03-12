@@ -6,6 +6,20 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 	return data;
 });
 
+export const savePost = createAsyncThunk('post/savePost', async ({ postId, userId }) => {
+	const response = await axios.post(`/users/${userId}/save-post/${postId}`);
+	return response.data;
+});
+
+export const saveLike = createAsyncThunk('post/likePost', async ({ postId, userId }) => {
+	const response = await axios.post(`/users/${userId}/like-post/${postId}`);
+	return response.data;
+});
+
+export const removeSavedPost = (postId) => (dispatch) => {
+	dispatch(authActions.removeSavedPost(postId));
+};
+
 const initialState = {
 	posts: {
 		items: [],
@@ -16,7 +30,15 @@ const initialState = {
 const postsSlice = createSlice({
 	name: 'posts',
 	initialState,
-	reducer: {},
+	reducer: {
+		updateSavedState: (state, action) => {
+			const { postId, saved } = action.payload;
+			const post = state.posts.find((post) => post.id === postId);
+			if (post) {
+				post.isSaved = saved;
+			}
+		},
+	},
 	extraReducers: {
 		[fetchPosts.pending]: (state) => {
 			state.posts.items = [];
@@ -34,3 +56,7 @@ const postsSlice = createSlice({
 });
 
 export const postsReducer = postsSlice.reducer;
+
+export const selectPosts = (state) => state.auth.status;
+
+export const { updateSavedState } = postsSlice.actions;

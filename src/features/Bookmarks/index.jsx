@@ -13,7 +13,7 @@ const Bookmarks = () => {
 
 	useEffect(() => {
 		dispatch(fetchPosts());
-	}, [userData]);
+	}, [savedPostIds]);
 
 	const filteredPosts = savedPostIds
 		? savedPostIds

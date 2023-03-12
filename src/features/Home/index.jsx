@@ -9,7 +9,6 @@ const Home = () => {
 	const dispatch = useDispatch();
 	const { posts } = useSelector((state) => state.posts);
 	const isAuth = useSelector(selectIsAuth);
-
 	const isPostsLoading = posts.status == 'loading';
 
 	useEffect(() => {

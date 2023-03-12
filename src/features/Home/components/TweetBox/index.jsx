@@ -4,13 +4,15 @@ import styled from './index.module.css';
 import user from '../../../../assets/images/user.jpg';
 import photo from '../../../../assets/icons/photo.png';
 import { selectIsAuthMe } from '../../../../redux/slices/auth.js';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchPosts } from '../../../../redux/slices/post';
 
 const TweetBox = () => {
 	const [text, setText] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	const inputRef = useRef(null);
 	const userData = useSelector(selectIsAuthMe);
+	const dispatch = useDispatch();
 
 	const handleChangeFile = async (e) => {
 		try {
@@ -25,36 +27,35 @@ const TweetBox = () => {
 		}
 	};
 
-	const onSubmit = async () => {
+	const onSubmit = async (e) => {
+		e.preventDefault();
 		try {
 			const fields = {
 				text,
 				imageUrl,
 			};
 			const { data } = await axios.post('/posts', fields);
+			dispatch(fetchPosts(data));
+			setText('');
+			setImageUrl('');
 		} catch (err) {
 			console.warn(err);
 			alert('post is not create');
 		}
 	};
-	console.log(userData.avatarUrl);
 
 	return (
 		<div className={styled.wrapper}>
 			<div className={styled.title}>Tweet someting</div>
 			<div className={styled.formBox}>
-				<form className={styled.form}>
+				<form onSubmit={onSubmit} className={styled.form}>
 					<div className={styled.formdiv}>
-						{userData.avatarUrl == ('' || 'undefined') ? (
+						{!userData.avatarUrl || userData.avatarUrl === '' ? (
 							<img className={styled.userImg} src={user} alt="#" />
 						) : (
-							<img
-								className={styled.userImg}
-								src={`http://localhost:8080${userData.avatarUrl}`}
-								alt={imageUrl.slice(30, 45)}
-							/>
+							<img className={styled.userImg} src={`http://localhost:8080${userData.avatarUrl}`} alt="#" />
 						)}
-						<img src={imageUrl} alt="" />
+
 						<input ref={inputRef} type="file" onChange={handleChangeFile} hidden />
 						<input
 							value={text}
@@ -69,7 +70,7 @@ const TweetBox = () => {
 							<img onClick={() => inputRef.current.click()} className={styled.fromIconsImg} src={photo} alt="photo" />
 						</div>
 
-						<button onClick={onSubmit} type="submit" className={styled.button}>
+						<button type="submit" className={styled.button}>
 							Tweet
 						</button>
 					</div>

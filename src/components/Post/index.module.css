@@ -108,6 +108,7 @@
 
 .form {
 	display: flex;
+	margin-top: 20px;
 }
 
 .form img {
@@ -241,6 +242,11 @@
 	font-size: 12px;
 	line-height: 16px;
 	color: #bdbdbd;
+}
+
+.nameBtn {
+	border: none;
+	background-color: #fff;
 }
 
 @media screen and (max-width: 525px) {
