@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Post from '../../components/Post';
-import { selectIsAuthMe } from '../../redux/slices/auth';
+import { fetchAuthMe, selectIsAuthMe } from '../../redux/slices/auth';
 import { fetchPosts } from '../../redux/slices/post';
 
 const Bookmarks = () => {
@@ -10,6 +10,10 @@ const Bookmarks = () => {
 	const userData = useSelector(selectIsAuthMe);
 	const savedPostIds = userData.savedPosts;
 	const isPostsLoading = posts.status == 'loading';
+
+	useEffect(() => {
+		dispatch(fetchAuthMe());
+	}, []);
 
 	useEffect(() => {
 		dispatch(fetchPosts());

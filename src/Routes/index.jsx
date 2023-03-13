@@ -9,11 +9,10 @@ import LoginPage from '../pages/Login';
 import MyProfilePage from '../pages/MyProfile';
 import NotFound from '../pages/NotFound';
 import RegistrationPage from '../pages/Registration';
-import { fetchAuthMe, selectIsAuth } from '../redux/slices/auth';
+import { fetchAuthMe } from '../redux/slices/auth';
 
 const PageRoutes = () => {
 	const dispath = useDispatch();
-	const isAuth = useSelector(selectIsAuth);
 
 	useEffect(() => {
 		dispath(fetchAuthMe());

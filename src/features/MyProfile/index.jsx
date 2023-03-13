@@ -130,7 +130,7 @@ const MyProfile = () => {
 							<span>{userData?.Followers?.length} </span>Followers
 						</p>
 					</div>
-					<p className={styled.text}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, iusto.</p>
+					{userData.bio ? <p className={styled.text}></p> : null}
 				</div>
 				<div>
 					<button onClick={handleOpen}>

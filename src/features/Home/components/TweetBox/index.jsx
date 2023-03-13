@@ -10,6 +10,7 @@ import { fetchPosts } from '../../../../redux/slices/post';
 const TweetBox = () => {
 	const [text, setText] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
+	const [follow, setFollow] = useState();
 	const inputRef = useRef(null);
 	const userData = useSelector(selectIsAuthMe);
 	const dispatch = useDispatch();

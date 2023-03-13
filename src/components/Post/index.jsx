@@ -9,7 +9,7 @@ import saved from '../../assets/icons/saved.png';
 import { PostSkeleton } from './Skeleton';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAuthMe, selectIsAuth, selectIsAuthMe } from '../../redux/slices/auth';
-import { saveLike, savePost } from '../../redux/slices/post';
+import { fetchPosts, saveLike, savePost } from '../../redux/slices/post';
 import axios from '../../axios';
 
 const Post = ({ postId, text, avatarUrl, imageUrl, user, createdAt, isFullPost, isLoading }) => {
@@ -21,7 +21,6 @@ const Post = ({ postId, text, avatarUrl, imageUrl, user, createdAt, isFullPost, 
 	const [isSaved, setIsSaved] = useState(false);
 	const [isLiked, setIsLiked] = useState(false);
 	const [comentOpen, setComentOpen] = useState(false);
-	const [follow, setFollow] = useState();
 
 	const formattedDate = createdAt.replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).*/, '$1 $2 $3 $4:$5:$6');
 
@@ -46,6 +45,8 @@ const Post = ({ postId, text, avatarUrl, imageUrl, user, createdAt, isFullPost, 
 			.catch((error) => {
 				console.error(error);
 			});
+		const { data } = await axios.get('/posts');
+		dispatch(fetchPosts(data));
 	};
 
 	const handleLikeClick = async () => {
@@ -63,20 +64,6 @@ const Post = ({ postId, text, avatarUrl, imageUrl, user, createdAt, isFullPost, 
 		setComentOpen((e) => !e);
 	};
 
-	const handleFollow = async (e) => {
-		e.preventDefault();
-		const userDataId = userData._id;
-		const response = axios
-			.put(`http://localhost:8080/users/following/${user._id}`, { userDataId })
-			.then((response) => {
-				console.log(response);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-		dispatch(fetchAuthMe(response));
-	};
-
 	return (
 		<div className={styled.wrapper}>
 			<div className={styled.user}>
@@ -89,11 +76,9 @@ const Post = ({ postId, text, avatarUrl, imageUrl, user, createdAt, isFullPost, 
 					{isFullPost ? (
 						title
 					) : (
-						<form onSubmit={handleFollow}>
-							<button type="submit" className={styled.nameBtn}>
-								<p className={styled.name}>{user.fullName}</p>
-							</button>
-						</form>
+						<button type="submit" className={styled.nameBtn}>
+							<p className={styled.name}>{user.fullName}</p>
+						</button>
 					)}
 					<p className={styled.date}>{formattedDate}</p>
 				</div>
