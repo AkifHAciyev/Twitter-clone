@@ -13,7 +13,7 @@ const Home = () => {
 
 	const isPostsLoading = posts.status == 'loading';
 
-	const followedPosts = posts.items.filter((post) => userData.Following.includes(post.user._id));
+	const followedPosts = posts.items.filter((post) => userData.Following?.includes(post.user._id));
 
 	useEffect(() => {
 		dispatch(fetchAuthMe());

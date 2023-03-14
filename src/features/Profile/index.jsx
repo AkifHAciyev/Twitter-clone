@@ -21,7 +21,7 @@ const Profile = () => {
 		axios
 			.get('/users/' + params.id)
 			.then((res) => {
-				setUserInfo(res);
+				setUserInfo(res.data);
 			})
 			.catch((error) => {
 				console.error(error);
@@ -45,9 +45,9 @@ const Profile = () => {
 			<img
 				className={styled.userAvo}
 				src={
-					!userData.coverUrl || userData.coverUrl == 'http://localhost:8080'
+					!userInfo.coverUrl || userInfo.coverUrl == 'http://localhost:8080'
 						? cover
-						: `http://localhost:8080${userData.coverUrl}`
+						: `http://localhost:8080${userInfo.coverUrl}`
 				}
 				alt="#"
 			/>
@@ -56,20 +56,20 @@ const Profile = () => {
 				<img
 					className={styled.userInfoImg}
 					src={
-						!userData.avatarUrl || userData.avatarUrl == 'http://localhost:8080'
+						!userInfo.avatarUrl || userInfo.avatarUrl == 'http://localhost:8080'
 							? user
-							: `http://localhost:8080${userData.avatarUrl}`
+							: `http://localhost:8080${userInfo.avatarUrl}`
 					}
 					alt="#"
 				/>
 				<div className={styled.center}>
 					<div>
-						<p className={styled.name}>{userData.fullName}</p>
+						<p className={styled.name}>{userInfo.fullName}</p>
 						<p className={styled.follor}>
-							<span>{userData?.Following?.length} </span>Following
+							<span>{userInfo?.Following?.length} </span>Following
 						</p>
 						<p className={styled.follor}>
-							<span>{userData?.Followers?.length} </span>Followers
+							<span>{userInfo?.Followers?.length} </span>Followers
 						</p>
 					</div>
 					{userData.bio ? <p className={styled.text}></p> : null}
