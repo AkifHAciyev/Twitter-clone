@@ -11,7 +11,7 @@ const Footer = () => {
 	let activeStyle = {
 		color: '#2f80ed',
 		borderBottom: '3px solid #2f80ed',
-		paddingBottom: '21px',
+		paddingBottom: '8px',
 	};
 
 	const isAuth = useSelector(selectIsAuth);

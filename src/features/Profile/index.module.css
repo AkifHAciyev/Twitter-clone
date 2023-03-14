@@ -10,7 +10,6 @@
 	width: 100% !important;
 	height: 297.51px;
 	object-fit: cover;
-	cursor: pointer;
 }
 
 .userInfo {
@@ -35,7 +34,6 @@
 	top: -44px;
 	left: 24px;
 	border-radius: 8px;
-	cursor: pointer;
 }
 
 .userInfo button img {
@@ -94,7 +92,7 @@
 	font-size: 18px;
 	line-height: 25px;
 	letter-spacing: -0.035em;
-	margin-right: 20px;
+
 	color: #828282;
 }
 
@@ -151,32 +149,6 @@
 	cursor: pointer;
 	opacity: 0;
 	z-index: 9;
-}
-
-.biowrapper {
-	display: flex;
-	align-items: center;
-}
-
-.bioForm {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.bioForm input {
-	outline: none;
-	padding: 5px 10px;
-	border: none;
-}
-
-.bioForm input::placeholder {
-	font-family: 'Noto Sans';
-	font-style: normal;
-	font-weight: 500;
-	font-size: 12px;
-	line-height: 22px;
-	color: #bdbdbd;
 }
 
 @media screen and (max-width: 800px) {

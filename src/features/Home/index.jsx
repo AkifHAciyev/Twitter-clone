@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Post from '../../components/Post';
-import { selectIsAuth } from '../../redux/slices/auth';
+import { fetchAuthMe, selectIsAuth, selectIsAuthMe } from '../../redux/slices/auth';
 import { fetchPosts } from '../../redux/slices/post';
 import TweetBox from './components/TweetBox';
 
@@ -9,7 +9,15 @@ const Home = () => {
 	const dispatch = useDispatch();
 	const { posts } = useSelector((state) => state.posts);
 	const isAuth = useSelector(selectIsAuth);
+	const userData = useSelector(selectIsAuthMe);
+
 	const isPostsLoading = posts.status == 'loading';
+
+	const followedPosts = posts.items.filter((post) => userData.Following.includes(post.user._id));
+
+	useEffect(() => {
+		dispatch(fetchAuthMe());
+	}, []);
 
 	useEffect(() => {
 		dispatch(fetchPosts());
@@ -17,7 +25,7 @@ const Home = () => {
 	return (
 		<div>
 			{isAuth && <TweetBox />}
-			{(isPostsLoading ? [...Array(5)] : [...posts.items].reverse()).map((obj, index) =>
+			{(isPostsLoading ? [...Array(5)] : followedPosts.reverse()).map((obj, index) =>
 				isPostsLoading ? (
 					<Post key={index} isLoading={true} />
 				) : (
@@ -29,6 +37,7 @@ const Home = () => {
 						avatarUrl={`http://localhost:8080${obj.user.avatarUrl}`}
 						user={obj.user}
 						createdAt={obj.createdAt}
+						comments={obj.comments}
 					/>
 				)
 			)}

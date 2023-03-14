@@ -4,6 +4,7 @@ import serach from '../../assets/icons/search.png';
 import Post from '../../components/Post';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from '../../redux/slices/post';
+import { fetchAuthMe } from '../../redux/slices/auth';
 
 const Explore = () => {
 	const [searchQuery, setSearchQuery] = useState('');
@@ -12,6 +13,10 @@ const Explore = () => {
 	const { posts } = useSelector((state) => state.posts);
 
 	const isPostsLoading = posts.status == 'loading';
+
+	useEffect(() => {
+		dispatch(fetchAuthMe());
+	}, []);
 
 	useEffect(() => {
 		if (searchQuery.length === 0 || searchQuery.length > 2) dispatch(fetchPosts());
@@ -54,6 +59,7 @@ const Explore = () => {
 						avatarUrl={`http://localhost:8080${obj.user.avatarUrl}`}
 						user={obj.user}
 						createdAt={obj.createdAt}
+						comments={obj.comments}
 					/>
 				)
 			)}

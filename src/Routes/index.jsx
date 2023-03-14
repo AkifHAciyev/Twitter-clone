@@ -8,6 +8,7 @@ import HomePage from '../pages/Home';
 import LoginPage from '../pages/Login';
 import MyProfilePage from '../pages/MyProfile';
 import NotFound from '../pages/NotFound';
+import ProfilePage from '../pages/Profile';
 import RegistrationPage from '../pages/Registration';
 import { fetchAuthMe } from '../redux/slices/auth';
 
@@ -28,6 +29,7 @@ const PageRoutes = () => {
 				<Route path="*" element={<NotFound />} />
 				<Route path="/login" element={<LoginPage />} />
 				<Route path="/register" element={<RegistrationPage />} />
+				<Route path="/profile" element={<ProfilePage />} />
 			</Route>
 		</Routes>
 	);

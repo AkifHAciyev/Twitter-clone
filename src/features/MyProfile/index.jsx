@@ -16,6 +16,7 @@ const MyProfile = () => {
 	const [avatarUrl, setAvatarUrl] = useState('');
 	const [coverUrl, setCoverUrl] = useState('');
 	const [bio, setBio] = useState('');
+	const [openBio, setOpenBio] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	const dispatch = useDispatch();
@@ -23,6 +24,14 @@ const MyProfile = () => {
 	const userData = useSelector(selectIsAuthMe);
 	const inputRefAvo = useRef(null);
 	const inputRefCover = useRef(null);
+
+	useEffect(() => {
+		dispatch(fetchPosts());
+	}, [dispatch]);
+
+	useEffect(() => {
+		dispatch(fetchAuthMe());
+	}, [dispatch]);
 
 	const handleChangeFileAvo = async (e) => {
 		try {
@@ -81,11 +90,23 @@ const MyProfile = () => {
 		}
 	};
 
+	const onSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const fields = {
+				bio: bio,
+			};
+			const { data } = await axios.put(`/users/${userData._id}/bio`, fields);
+			dispatch(fetchAuthMe(data));
+			setBio('');
+		} catch (err) {
+			console.warn(err);
+			alert('bio is not create');
+		}
+	};
+
 	const isPostsLoading = posts.status == 'loading';
 
-	useEffect(() => {
-		dispatch(fetchPosts());
-	}, []);
 	return (
 		<div className={styled.wrapper}>
 			<img
@@ -130,7 +151,18 @@ const MyProfile = () => {
 							<span>{userData?.Followers?.length} </span>Followers
 						</p>
 					</div>
-					{userData.bio ? <p className={styled.text}></p> : null}
+					<div className={styled.biowrapper}>
+						{openBio && (
+							<form className={styled.bioForm} onSubmit={onSubmit}>
+								<input type="text" placeholder="Add your bio" value={bio} onChange={(e) => setBio(e.target.value)} />
+								<button type="submit">Add bio</button>
+							</form>
+						)}
+					</div>
+					<div>
+						{userData.bio ? <p className={styled.text}>{userData.bio}</p> : null}
+						<button onClick={() => setOpenBio((e) => !e)}>Edit bio</button>
+					</div>
 				</div>
 				<div>
 					<button onClick={handleOpen}>
@@ -152,6 +184,7 @@ const MyProfile = () => {
 						avatarUrl={`http://localhost:8080${obj.user.avatarUrl}`}
 						user={obj.user}
 						createdAt={obj.createdAt}
+						comments={obj.comments}
 					/>
 				)
 			)}

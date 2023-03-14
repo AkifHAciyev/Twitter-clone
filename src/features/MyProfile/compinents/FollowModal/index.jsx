@@ -4,10 +4,10 @@ import Modal from '@mui/material/Modal';
 import styled from './index.module.css';
 import user from '../../../../assets/images/user.jpg';
 import addUser from '../../../../assets/icons/add-user.png';
-import addedUser from '../../../../assets/icons/addeduser.png';
+import unFollow from '../../../../assets/icons/unFollow.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from '../../../../redux/slices/users';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { fetchAuthMe, selectIsAuthMe } from '../../../../redux/slices/auth';
 import axios from '../../../../axios';
 
@@ -25,7 +25,6 @@ const style = {
 };
 
 const FollowModal = ({ handleClose }) => {
-	const [follow, setFollow] = useState(addUser);
 	const { users } = useSelector((state) => state.users);
 	const isUsersLoading = users.status == 'loading';
 	const userData = useSelector(selectIsAuthMe);
@@ -33,14 +32,35 @@ const FollowModal = ({ handleClose }) => {
 
 	useEffect(() => {
 		dispatch(fetchUsers());
+	}, [dispatch]);
+
+	useEffect(() => {
+		userData;
 	}, []);
+
+	useEffect(() => {
+		dispatch(fetchAuthMe());
+	}, [dispatch]);
 
 	const handleFollow = async (e, userId) => {
 		e.preventDefault();
-		setFollow(addedUser);
 		const userDataId = userData._id;
 		const response = axios
 			.put(`http://localhost:8080/users/following/${userId}`, { userDataId })
+			.then((response) => {
+				console.log(response);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+		dispatch(fetchAuthMe(response));
+	};
+
+	const handleUnFollow = async (e, userId) => {
+		e.preventDefault();
+		const userDataId = userData._id;
+		const response = axios
+			.put(`http://localhost:8080/users/unfollowing/${userId}`, { userDataId })
 			.then((response) => {
 				console.log(response);
 			})
@@ -82,13 +102,13 @@ const FollowModal = ({ handleClose }) => {
 										</div>
 									</div>
 									<button className={styled.button}>
-										<img className={styled.follorIcon} src={follow} alt="#" />
+										<img className={styled.follorIcon} src={addUser} alt="#" />
 										Follow
 									</button>
 								</div>
 								<p className={styled.text}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, iusto.</p>
 							</div>
-						) : (
+						) : obj._id === userData._id ? null : (
 							<div key={obj._id} className={styled.userInfo}>
 								<div className={styled.center}>
 									<div className={styled.left}>
@@ -106,12 +126,17 @@ const FollowModal = ({ handleClose }) => {
 											<p className={styled.follor}>Followers : {obj.Followers.length}</p>
 										</div>
 									</div>
-									<form onSubmit={(e) => handleFollow(e, obj._id)}>
-										<button type="submit" className={styled.button}>
+									{userData?.Following?.includes(obj._id) ? (
+										<button onClick={(e) => handleUnFollow(e, obj._id)} className={styled.button}>
+											<img className={styled.follorIcon} src={unFollow} alt="#" />
+											Un Follow
+										</button>
+									) : (
+										<button onClick={(e) => handleFollow(e, obj._id)} className={styled.button}>
 											<img className={styled.follorIcon} src={addUser} alt="#" />
 											Follow
 										</button>
-									</form>
+									)}
 								</div>
 								<p className={styled.text}>{obj.bio ? obj.bio : null}</p>
 							</div>

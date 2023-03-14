@@ -16,6 +16,11 @@ export const saveLike = createAsyncThunk('post/likePost', async ({ postId, userI
 	return response.data;
 });
 
+export const commentsAdd = createAsyncThunk('post/comments', async () => {
+	const response = await axios.put(`/posts/comments/post`);
+	return response.data;
+});
+
 export const removeSavedPost = (postId) => (dispatch) => {
 	dispatch(authActions.removeSavedPost(postId));
 };

@@ -2,8 +2,7 @@
 	background: #ffffff;
 	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
 	border-radius: 8px;
-	max-width: 745px;
-	width: 100%;
+	width: 745px;
 	margin-top: 25px;
 	padding: 20px;
 }
@@ -111,6 +110,10 @@
 	margin-top: 20px;
 }
 
+.formBtn {
+	background-color: #2f80ed;
+}
+
 .form img {
 	height: 40px;
 	width: 40px;
@@ -145,14 +148,15 @@
 }
 
 .form button {
-	position: relative;
 	left: -35px;
-	width: 15px;
-	height: 15px;
+	padding: 5px 10px;
+	border-radius: 10px;
 	border: none;
-	background-color: #fff;
+	background-color: #2f80ed;
 	margin: auto 0;
 	cursor: pointer;
+	color: #fff;
+	margin-left: 10px;
 }
 
 .form button img {
@@ -247,6 +251,24 @@
 .nameBtn {
 	border: none;
 	background-color: #fff;
+}
+
+@media (max-width: 768px) {
+	.wrapper {
+		width: 100%;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+	.wrapper {
+		max-width: 745px;
+	}
+}
+
+@media (min-width: 992px) {
+	.wrapper {
+		width: 745px;
+	}
 }
 
 @media screen and (max-width: 525px) {

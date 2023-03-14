@@ -8,11 +8,11 @@ import save from '../../assets/icons/save.png';
 import saved from '../../assets/icons/saved.png';
 import { PostSkeleton } from './Skeleton';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAuthMe, selectIsAuth, selectIsAuthMe } from '../../redux/slices/auth';
-import { fetchPosts, saveLike, savePost } from '../../redux/slices/post';
+import { selectIsAuth, selectIsAuthMe } from '../../redux/slices/auth';
+import { commentsAdd, fetchPosts, saveLike, savePost } from '../../redux/slices/post';
 import axios from '../../axios';
 
-const Post = ({ postId, text, avatarUrl, imageUrl, user, createdAt, isFullPost, isLoading }) => {
+const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, isFullPost, isLoading }) => {
 	if (isLoading) {
 		return <PostSkeleton />;
 	}
@@ -21,10 +21,10 @@ const Post = ({ postId, text, avatarUrl, imageUrl, user, createdAt, isFullPost, 
 	const [isSaved, setIsSaved] = useState(false);
 	const [isLiked, setIsLiked] = useState(false);
 	const [comentOpen, setComentOpen] = useState(false);
-
-	const formattedDate = createdAt.replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).*/, '$1 $2 $3 $4:$5:$6');
-
+	const [commentwriting, setcommentwriting] = useState('');
+	const [Comments, setComments] = useState(comments);
 	const isAuth = useSelector(selectIsAuth);
+	const formattedDate = createdAt.replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).*/, '$1 $2 $3 $4:$5:$6');
 
 	useEffect(() => {
 		const saved = localStorage.getItem(`post-${postId}-isSaved`);
@@ -35,6 +35,23 @@ const Post = ({ postId, text, avatarUrl, imageUrl, user, createdAt, isFullPost, 
 		const liked = localStorage.getItem(`post-${postId}-isLiked`);
 		setIsLiked(liked === 'true');
 	}, []);
+
+	const addComment = async () => {
+		const comment = {
+			userId: `${userData._id}`,
+			username: `${userData.fullName}`,
+			postId: `${postId}`,
+			comment: `${commentwriting}`,
+			avatar: `${userData.avatarUrl}`,
+		};
+		try {
+			const response = await axios.put('/posts/comments/post', comment);
+			dispatch(commentsAdd(response));
+			setComments(Comments.concat(response));
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	const handleSaveClick = async () => {
 		dispatch(savePost({ postId, userId: userData._id }))
@@ -58,6 +75,15 @@ const Post = ({ postId, text, avatarUrl, imageUrl, user, createdAt, isFullPost, 
 			.catch((error) => {
 				console.error(error);
 			});
+	};
+
+	const handleAddComment = async (e) => {
+		e.preventDefault();
+
+		addComment();
+		setcommentwriting('');
+		const { data } = await axios.get('/posts');
+		dispatch(fetchPosts(data));
 	};
 
 	const handleCommentOpen = () => {
@@ -95,7 +121,7 @@ const Post = ({ postId, text, avatarUrl, imageUrl, user, createdAt, isFullPost, 
 				<>
 					<div className={styled.userActions}>
 						<button onClick={handleCommentOpen}>
-							<img src={comment} alt="comment" /> <span>Comment</span>
+							<img src={comment} alt="comment" /> <span>Comment {Comments.length}</span>
 						</button>
 						<button onClick={handleLikeClick}>
 							<img src={isLiked ? liked : heart} alt="Liked" /> <span>Liked</span>
@@ -104,38 +130,51 @@ const Post = ({ postId, text, avatarUrl, imageUrl, user, createdAt, isFullPost, 
 							<img src={isSaved ? saved : save} alt="saved" /> <span>Saved</span>
 						</button>
 					</div>
-					<form className={styled.form}>
-						{avatarUrl == 'http://localhost:8080undefined' || avatarUrl == 'http://localhost:8080' ? (
+					<form className={styled.form} onSubmit={handleAddComment}>
+						{userData.avatarUrl == 'http://localhost:8080undefined' || userData.avatarUrl == 'http://localhost:8080' ? (
 							<img className={styled.tweetImg} src={usera} alt="#" />
 						) : (
-							<img className={styled.tweetImg} src={avatarUrl} alt="#" />
+							<img className={styled.tweetImg} src={`http://localhost:8080${userData.avatarUrl}`} alt="#" />
 						)}
-						<input type="text" placeholder="Tweet your reply" />
+						<input
+							type="text"
+							placeholder="Tweet your reply"
+							value={commentwriting}
+							onChange={(e) => setcommentwriting(e.target.value)}
+						/>
+						<button className={styled.formBtn} type="submit">
+							Post
+						</button>
 					</form>
 				</>
 			)}
 
-			{comentOpen && (
-				<div className={styled.comment}>
-					<div className={styled.commentTitle}>
-						<img src={usera} alt="#" />
-						<div className={styled.commentSection}>
-							<p className={styled.commentSectionName}>
-								Waqar Bloom <span>24 march at 22:32</span>
-							</p>
-							<p className={styled.commentSectionText}>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, veniam!
-							</p>
+			{comentOpen &&
+				Comments?.map((item) => (
+					<div key={item._id} className={styled.comment}>
+						<div className={styled.commentTitle}>
+							{item.imageUrl ? (
+								<img className={styled.tweetImg} src={usera} alt="#" />
+							) : (
+								<img className={styled.tweetImg} src={`http://localhost:8080${item.avatar}`} alt="#" />
+							)}
+							<div className={styled.commentSection}>
+								<p className={styled.commentSectionName}>
+									{item.username}{' '}
+									<span>
+										{item?.createdAt
+											? item?.createdAt.replace(
+													/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).*/,
+													'$1 $2 $3 $4:$5:$6'
+											  )
+											: null}
+									</span>
+								</p>
+								<p className={styled.commentSectionText}>{item.comment}</p>
+							</div>
 						</div>
 					</div>
-
-					<div className={styled.likes}>
-						<img src={heart} alt="like" />
-						<span>Like</span>
-						<p>12k Likes</p>
-					</div>
-				</div>
-			)}
+				))}
 		</div>
 	);
 };

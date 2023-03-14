@@ -41,6 +41,7 @@ const Bookmarks = () => {
 						avatarUrl={`http://localhost:8080${obj.user.avatarUrl}`}
 						user={obj.user}
 						createdAt={obj.createdAt}
+						comments={obj.comments}
 					/>
 				)
 			)}
