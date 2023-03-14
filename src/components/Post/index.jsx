@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectIsAuth, selectIsAuthMe } from '../../redux/slices/auth';
 import { commentsAdd, fetchPosts, saveLike, savePost } from '../../redux/slices/post';
 import axios from '../../axios';
+import { NavLink } from 'react-router-dom';
 
 const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, isFullPost, isLoading }) => {
 	if (isLoading) {
@@ -92,23 +93,26 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 
 	return (
 		<div className={styled.wrapper}>
-			<div className={styled.user}>
-				{avatarUrl == 'http://localhost:8080undefined' || avatarUrl == 'http://localhost:8080' ? (
-					<img className={styled.tweetImg} src={usera} alt="#" />
-				) : (
-					<img className={styled.tweetImg} src={avatarUrl} alt="#" />
-				)}
-				<div className={styled.userName}>
-					{isFullPost ? (
-						title
+			<NavLink to={`/profile/${user._id}`}>
+				<div className={styled.user}>
+					{avatarUrl == 'http://localhost:8080undefined' || avatarUrl == 'http://localhost:8080' ? (
+						<img className={styled.tweetImg} src={usera} alt="#" />
 					) : (
-						<button type="submit" className={styled.nameBtn}>
-							<p className={styled.name}>{user.fullName}</p>
-						</button>
+						<img className={styled.tweetImg} src={avatarUrl} alt="#" />
 					)}
-					<p className={styled.date}>{formattedDate}</p>
+					<div className={styled.userName}>
+						{isFullPost ? (
+							title
+						) : (
+							<button type="submit" className={styled.nameBtn}>
+								<p className={styled.name}>{user.fullName}</p>
+							</button>
+						)}
+						<p className={styled.date}>{formattedDate}</p>
+					</div>
 				</div>
-			</div>
+			</NavLink>
+
 			<div className={styled.tweet}>
 				<p className={styled.tweetText}>{text}</p>
 				{imageUrl == 'http://localhost:8080undefined' || imageUrl == 'http://localhost:8080' ? (

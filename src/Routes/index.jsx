@@ -29,7 +29,7 @@ const PageRoutes = () => {
 				<Route path="*" element={<NotFound />} />
 				<Route path="/login" element={<LoginPage />} />
 				<Route path="/register" element={<RegistrationPage />} />
-				<Route path="/profile" element={<ProfilePage />} />
+				<Route path="/profile/:id" element={<ProfilePage />} />
 			</Route>
 		</Routes>
 	);

@@ -1,17 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from './index.module.css';
 import Post from '../../components/Post';
 import cover from '../../assets/images/cover.png';
 import user from '../../assets/images/user.jpg';
+import axios from '../../axios';
 
 import { fetchPosts } from '../../redux/slices/post';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAuthMe, selectIsAuthMe } from '../../redux/slices/auth';
+import { useParams } from 'react-router-dom';
 
 const Profile = () => {
+	const [userInfo, setUserInfo] = useState([]);
 	const dispatch = useDispatch();
 	const { posts } = useSelector((state) => state.posts);
 	const userData = useSelector(selectIsAuthMe);
+	const params = useParams();
+
+	useEffect(() => {
+		axios
+			.get('/users/' + params.id)
+			.then((res) => {
+				setUserInfo(res);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}, []);
+
+	console.log(userInfo);
 
 	useEffect(() => {
 		dispatch(fetchPosts());
