@@ -33,8 +33,8 @@ const Home = () => {
 						key={obj._id}
 						postId={obj._id}
 						text={obj.text}
-						imageUrl={`https://twitter-clone-server-bay.vercel.app${obj.imageUrl}`}
-						avatarUrl={`https://twitter-clone-server-bay.vercel.app${obj.user.avatarUrl}`}
+						imageUrl={`http://localhost:8080${obj.imageUrl}`}
+						avatarUrl={`http://localhost:8080${obj.user.avatarUrl}`}
 						user={obj.user}
 						createdAt={obj.createdAt}
 						comments={obj.comments}

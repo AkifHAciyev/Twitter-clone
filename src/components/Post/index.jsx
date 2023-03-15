@@ -94,8 +94,7 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 		<div className={styled.wrapper}>
 			<NavLink to={`/profile/${user._id}`}>
 				<div className={styled.user}>
-					{avatarUrl == 'twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.appundefined' ||
-					avatarUrl == 'twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.app' ? (
+					{avatarUrl == 'http://localhost:8080undefined' || avatarUrl == 'http://localhost:8080' ? (
 						<img className={styled.tweetImg} src={usera} alt="#" />
 					) : (
 						<img className={styled.tweetImg} src={avatarUrl} alt="#" />
@@ -115,8 +114,7 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 
 			<div className={styled.tweet}>
 				<p className={styled.tweetText}>{text}</p>
-				{imageUrl == 'twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.appundefined' ||
-				imageUrl == 'twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.app' ? (
+				{imageUrl == 'http://localhost:8080undefined' || imageUrl == 'http://localhost:8080' ? (
 					<p></p>
 				) : (
 					<img className={styled.tweetImg} src={imageUrl} alt="#" />
@@ -136,15 +134,10 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 						</button>
 					</div>
 					<form className={styled.form} onSubmit={handleAddComment}>
-						{userData.avatarUrl == 'twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.appundefined' ||
-						userData.avatarUrl == 'twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.app' ? (
+						{avatarUrl == 'http://localhost:8080undefined' || avatarUrl == 'http://localhost:8080' ? (
 							<img className={styled.tweetImg} src={usera} alt="#" />
 						) : (
-							<img
-								className={styled.tweetImg}
-								src={`twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.app${userData.avatarUrl}`}
-								alt="#"
-							/>
+							<img className={styled.tweetImg} src={avatarUrl} alt="#" />
 						)}
 						<input
 							type="text"
@@ -166,11 +159,7 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 							{item.imageUrl ? (
 								<img className={styled.tweetImg} src={usera} alt="#" />
 							) : (
-								<img
-									className={styled.tweetImg}
-									src={`twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.app${item.avatar}`}
-									alt="#"
-								/>
+								<img className={styled.tweetImg} src={`${item.avatar}`} alt="#" />
 							)}
 							<div className={styled.commentSection}>
 								<p className={styled.commentSectionName}>

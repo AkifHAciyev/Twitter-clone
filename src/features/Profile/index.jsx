@@ -26,9 +26,7 @@ const Profile = () => {
 			.catch((error) => {
 				console.error(error);
 			});
-	}, []);
-
-	console.log(userInfo);
+	}, [params.id]);
 
 	useEffect(() => {
 		dispatch(fetchPosts());
@@ -45,9 +43,9 @@ const Profile = () => {
 			<img
 				className={styled.userAvo}
 				src={
-					!userInfo.coverUrl || userInfo.coverUrl == 'https://twitter-clone-server-bay.vercel.app'
+					!userInfo.coverUrl || userInfo.coverUrl == 'http://localhost:8080'
 						? cover
-						: `https://twitter-clone-server-bay.vercel.app${userInfo.coverUrl}`
+						: `http://localhost:8080${userInfo.coverUrl}`
 				}
 				alt="#"
 			/>
@@ -56,9 +54,9 @@ const Profile = () => {
 				<img
 					className={styled.userInfoImg}
 					src={
-						!userInfo.avatarUrl || userInfo.avatarUrl == 'https://twitter-clone-server-bay.vercel.app'
+						!userInfo.avatarUrl || userInfo.avatarUrl == 'http://localhost:8080'
 							? user
-							: `https://twitter-clone-server-bay.vercel.app${userInfo.avatarUrl}`
+							: `http://localhost:8080${userInfo.avatarUrl}`
 					}
 					alt="#"
 				/>
@@ -83,8 +81,8 @@ const Profile = () => {
 						key={obj._id}
 						postId={obj._id}
 						text={obj.text}
-						imageUrl={`https://twitter-clone-server-bay.vercel.app${obj.imageUrl}`}
-						avatarUrl={`https://twitter-clone-server-bay.vercel.app${obj.user.avatarUrl}`}
+						imageUrl={`http://localhost:8080${obj.imageUrl}`}
+						avatarUrl={`http://localhost:8080${obj.user.avatarUrl}`}
 						user={obj.user}
 						createdAt={obj.createdAt}
 						comments={obj.comments}

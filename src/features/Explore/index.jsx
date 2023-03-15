@@ -55,8 +55,8 @@ const Explore = () => {
 						key={obj._id}
 						postId={obj._id}
 						text={obj.text}
-						imageUrl={`twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.app${obj.imageUrl}`}
-						avatarUrl={`twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.app${obj.user.avatarUrl}`}
+						imageUrl={`http://localhost:8080${obj.imageUrl}`}
+						avatarUrl={`http://localhost:8080${obj.user.avatarUrl}`}
 						user={obj.user}
 						createdAt={obj.createdAt}
 						comments={obj.comments}
