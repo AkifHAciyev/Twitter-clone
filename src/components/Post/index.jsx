@@ -80,7 +80,6 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 
 	const handleAddComment = async (e) => {
 		e.preventDefault();
-
 		addComment();
 		setcommentwriting('');
 		const { data } = await axios.get('/posts');
@@ -135,10 +134,15 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 						</button>
 					</div>
 					<form className={styled.form} onSubmit={handleAddComment}>
-						{userData.avatarUrl == 'http://localhost:8080undefined' || userData.avatarUrl == 'http://localhost:8080' ? (
+						{userData.avatarUrl == 'https://twitter-clone-server-eta.vercel.appundefined' ||
+						userData.avatarUrl == 'https://twitter-clone-server-eta.vercel.app' ? (
 							<img className={styled.tweetImg} src={usera} alt="#" />
 						) : (
-							<img className={styled.tweetImg} src={`http://localhost:8080${userData.avatarUrl}`} alt="#" />
+							<img
+								className={styled.tweetImg}
+								src={`https://twitter-clone-server-eta.vercel.app${userData.avatarUrl}`}
+								alt="#"
+							/>
 						)}
 						<input
 							type="text"
@@ -160,7 +164,11 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 							{item.imageUrl ? (
 								<img className={styled.tweetImg} src={usera} alt="#" />
 							) : (
-								<img className={styled.tweetImg} src={`http://localhost:8080${item.avatar}`} alt="#" />
+								<img
+									className={styled.tweetImg}
+									src={`https://twitter-clone-server-eta.vercel.app${item.avatar}`}
+									alt="#"
+								/>
 							)}
 							<div className={styled.commentSection}>
 								<p className={styled.commentSectionName}>
