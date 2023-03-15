@@ -112,9 +112,9 @@ const MyProfile = () => {
 			<img
 				className={styled.userAvo}
 				src={
-					!userData.coverUrl || userData.coverUrl == 'http://localhost:8080'
+					!userData.coverUrl || userData.coverUrl == 'https://twitter-clone-server-bay.vercel.app'
 						? cover
-						: `http://localhost:8080${userData.coverUrl}`
+						: `https://twitter-clone-server-bay.vercel.app${userData.coverUrl}`
 				}
 				alt="#"
 				onClick={() => inputRefCover.current.click()}
@@ -131,9 +131,9 @@ const MyProfile = () => {
 					<img
 						className={styled.userInfoImg}
 						src={
-							!userData.avatarUrl || userData.avatarUrl == 'http://localhost:8080'
+							!userData.avatarUrl || userData.avatarUrl == 'https://twitter-clone-server-bay.vercel.app'
 								? user
-								: `http://localhost:8080${userData.avatarUrl}`
+								: `https://twitter-clone-server-bay.vercel.app${userData.avatarUrl}`
 						}
 						alt="#"
 						onClick={() => inputRefAvo.current.click()}
@@ -180,8 +180,8 @@ const MyProfile = () => {
 						key={obj._id}
 						postId={obj._id}
 						text={obj.text}
-						imageUrl={`http://localhost:8080${obj.imageUrl}`}
-						avatarUrl={`http://localhost:8080${obj.user.avatarUrl}`}
+						imageUrl={`https://twitter-clone-server-bay.vercel.app${obj.imageUrl}`}
+						avatarUrl={`https://twitter-clone-server-bay.vercel.app${obj.user.avatarUrl}`}
 						user={obj.user}
 						createdAt={obj.createdAt}
 						comments={obj.comments}

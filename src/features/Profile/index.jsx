@@ -45,9 +45,9 @@ const Profile = () => {
 			<img
 				className={styled.userAvo}
 				src={
-					!userInfo.coverUrl || userInfo.coverUrl == 'http://localhost:8080'
+					!userInfo.coverUrl || userInfo.coverUrl == 'https://twitter-clone-server-bay.vercel.app'
 						? cover
-						: `http://localhost:8080${userInfo.coverUrl}`
+						: `https://twitter-clone-server-bay.vercel.app${userInfo.coverUrl}`
 				}
 				alt="#"
 			/>
@@ -56,9 +56,9 @@ const Profile = () => {
 				<img
 					className={styled.userInfoImg}
 					src={
-						!userInfo.avatarUrl || userInfo.avatarUrl == 'http://localhost:8080'
+						!userInfo.avatarUrl || userInfo.avatarUrl == 'https://twitter-clone-server-bay.vercel.app'
 							? user
-							: `http://localhost:8080${userInfo.avatarUrl}`
+							: `https://twitter-clone-server-bay.vercel.app${userInfo.avatarUrl}`
 					}
 					alt="#"
 				/>
@@ -83,8 +83,8 @@ const Profile = () => {
 						key={obj._id}
 						postId={obj._id}
 						text={obj.text}
-						imageUrl={`http://localhost:8080${obj.imageUrl}`}
-						avatarUrl={`http://localhost:8080${obj.user.avatarUrl}`}
+						imageUrl={`https://twitter-clone-server-bay.vercel.app${obj.imageUrl}`}
+						avatarUrl={`https://twitter-clone-server-bay.vercel.app${obj.user.avatarUrl}`}
 						user={obj.user}
 						createdAt={obj.createdAt}
 						comments={obj.comments}
