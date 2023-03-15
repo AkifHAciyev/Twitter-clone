@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-	baseURL: 'https://twitter-clone-server-bay.vercel.app',
+	baseURL: 'https://twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.app',
 });
 
 instance.interceptors.request.use((config) => {

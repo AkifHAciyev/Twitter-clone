@@ -94,8 +94,8 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 		<div className={styled.wrapper}>
 			<NavLink to={`/profile/${user._id}`}>
 				<div className={styled.user}>
-					{avatarUrl == 'https://twitter-clone-server-bay.vercel.appundefined' ||
-					avatarUrl == 'https://twitter-clone-server-bay.vercel.app' ? (
+					{avatarUrl == 'twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.appundefined' ||
+					avatarUrl == 'twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.app' ? (
 						<img className={styled.tweetImg} src={usera} alt="#" />
 					) : (
 						<img className={styled.tweetImg} src={avatarUrl} alt="#" />
@@ -115,8 +115,8 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 
 			<div className={styled.tweet}>
 				<p className={styled.tweetText}>{text}</p>
-				{imageUrl == 'https://twitter-clone-server-bay.vercel.appundefined' ||
-				imageUrl == 'https://twitter-clone-server-bay.vercel.app' ? (
+				{imageUrl == 'twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.appundefined' ||
+				imageUrl == 'twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.app' ? (
 					<p></p>
 				) : (
 					<img className={styled.tweetImg} src={imageUrl} alt="#" />
@@ -136,13 +136,13 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 						</button>
 					</div>
 					<form className={styled.form} onSubmit={handleAddComment}>
-						{userData.avatarUrl == 'https://twitter-clone-server-bay.vercel.appundefined' ||
-						userData.avatarUrl == 'https://twitter-clone-server-bay.vercel.app' ? (
+						{userData.avatarUrl == 'twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.appundefined' ||
+						userData.avatarUrl == 'twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.app' ? (
 							<img className={styled.tweetImg} src={usera} alt="#" />
 						) : (
 							<img
 								className={styled.tweetImg}
-								src={`https://twitter-clone-server-bay.vercel.app${userData.avatarUrl}`}
+								src={`twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.app${userData.avatarUrl}`}
 								alt="#"
 							/>
 						)}
@@ -168,7 +168,7 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 							) : (
 								<img
 									className={styled.tweetImg}
-									src={`https://twitter-clone-server-bay.vercel.app${item.avatar}`}
+									src={`twitter-clone-server-euy1aq7jc-akifhaciyev.vercel.app${item.avatar}`}
 									alt="#"
 								/>
 							)}
