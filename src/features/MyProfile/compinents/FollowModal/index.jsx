@@ -46,7 +46,7 @@ const FollowModal = ({ handleClose }) => {
 		e.preventDefault();
 		const userDataId = userData._id;
 		const response = axios
-			.put(`http://localhost:8080/users/following/${userId}`, { userDataId })
+			.put(`https://goldfish-app-dv7j2.ondigitalocean.app/users/following/${userId}`, { userDataId })
 			.then((response) => {
 				console.log(response);
 			})
@@ -60,7 +60,7 @@ const FollowModal = ({ handleClose }) => {
 		e.preventDefault();
 		const userDataId = userData._id;
 		const response = axios
-			.put(`http://localhost:8080/users/unfollowing/${userId}`, { userDataId })
+			.put(`https://goldfish-app-dv7j2.ondigitalocean.app/users/unfollowing/${userId}`, { userDataId })
 			.then((response) => {
 				console.log(response);
 			})
@@ -115,9 +115,9 @@ const FollowModal = ({ handleClose }) => {
 										<img
 											className={styled.userInfoImg}
 											src={
-												!obj.avatarUrl || obj.avatarUrl == 'http://localhost:8080'
+												!obj.avatarUrl || obj.avatarUrl == 'https://goldfish-app-dv7j2.ondigitalocean.app'
 													? user
-													: `http://localhost:8080${obj.avatarUrl}`
+													: `https://goldfish-app-dv7j2.ondigitalocean.app${obj.avatarUrl}`
 											}
 											alt="#"
 										/>

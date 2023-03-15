@@ -43,9 +43,9 @@ const Profile = () => {
 			<img
 				className={styled.userAvo}
 				src={
-					!userInfo.coverUrl || userInfo.coverUrl == 'http://localhost:8080'
+					!userInfo.coverUrl || userInfo.coverUrl == 'https://goldfish-app-dv7j2.ondigitalocean.app'
 						? cover
-						: `http://localhost:8080${userInfo.coverUrl}`
+						: `https://goldfish-app-dv7j2.ondigitalocean.app${userInfo.coverUrl}`
 				}
 				alt="#"
 			/>
@@ -54,9 +54,9 @@ const Profile = () => {
 				<img
 					className={styled.userInfoImg}
 					src={
-						!userInfo.avatarUrl || userInfo.avatarUrl == 'http://localhost:8080'
+						!userInfo.avatarUrl || userInfo.avatarUrl == 'https://goldfish-app-dv7j2.ondigitalocean.app'
 							? user
-							: `http://localhost:8080${userInfo.avatarUrl}`
+							: `https://goldfish-app-dv7j2.ondigitalocean.app${userInfo.avatarUrl}`
 					}
 					alt="#"
 				/>
@@ -81,8 +81,8 @@ const Profile = () => {
 						key={obj._id}
 						postId={obj._id}
 						text={obj.text}
-						imageUrl={`http://localhost:8080${obj.imageUrl}`}
-						avatarUrl={`http://localhost:8080${obj.user.avatarUrl}`}
+						imageUrl={`https://goldfish-app-dv7j2.ondigitalocean.app${obj.imageUrl}`}
+						avatarUrl={`https://goldfish-app-dv7j2.ondigitalocean.app${obj.user.avatarUrl}`}
 						user={obj.user}
 						createdAt={obj.createdAt}
 						comments={obj.comments}
