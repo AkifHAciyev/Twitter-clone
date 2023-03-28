@@ -6,6 +6,7 @@ import heart from '../../assets/icons/heart.png';
 import liked from '../../assets/icons/liked.png';
 import save from '../../assets/icons/save.png';
 import saved from '../../assets/icons/saved.png';
+import retweet from '../../assets/icons/retweet.png';
 import { PostSkeleton } from './Skeleton';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsAuth, selectIsAuthMe } from '../../redux/slices/auth';
@@ -76,6 +77,8 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 			.catch((error) => {
 				console.error(error);
 			});
+		const { data } = await axios.get('/posts');
+		dispatch(fetchPosts(data));
 	};
 
 	const handleAddComment = async (e) => {
@@ -90,12 +93,26 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 		setComentOpen((e) => !e);
 	};
 
+	const handleRetweet = async (e, text, imageUrl) => {
+		e.preventDefault();
+		try {
+			const fields = {
+				text,
+				imageUrl,
+			};
+			const { data } = await axios.post('/posts', fields);
+			dispatch(fetchPosts(data));
+		} catch (err) {
+			console.warn(err);
+			alert('post is not retweet');
+		}
+	};
+
 	return (
 		<div className={styled.wrapper}>
 			<NavLink to={`/profile/${user._id}`}>
 				<div className={styled.user}>
-					{avatarUrl == 'https://goldfish-app-dv7j2.ondigitalocean.appundefined' ||
-					avatarUrl == 'https://goldfish-app-dv7j2.ondigitalocean.app' ? (
+					{avatarUrl == 'http://localhost:8080undefined' || avatarUrl == 'http://localhost:8080' ? (
 						<img className={styled.tweetImg} src={usera} alt="#" />
 					) : (
 						<img className={styled.tweetImg} src={avatarUrl} alt="#" />
@@ -115,8 +132,7 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 
 			<div className={styled.tweet}>
 				<p className={styled.tweetText}>{text}</p>
-				{imageUrl == 'https://goldfish-app-dv7j2.ondigitalocean.appundefined' ||
-				imageUrl == 'https://goldfish-app-dv7j2.ondigitalocean.app' ? (
+				{imageUrl == 'http://localhost:8080undefined' || imageUrl == 'http://localhost:8080' ? (
 					<p></p>
 				) : (
 					<img className={styled.tweetImg} src={imageUrl} alt="#" />
@@ -128,6 +144,9 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 						<button onClick={handleCommentOpen}>
 							<img src={comment} alt="comment" /> <span>Comment {Comments.length}</span>
 						</button>
+						<button onClick={(e) => handleRetweet(e, text, imageUrl.replace('http://localhost:8080', ''))}>
+							<img src={retweet} alt="retweet" /> <span>Retweet</span>
+						</button>
 						<button onClick={handleLikeClick}>
 							<img src={isLiked ? liked : heart} alt="Liked" /> <span>Liked</span>
 						</button>
@@ -136,7 +155,7 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 						</button>
 					</div>
 					<form className={styled.form} onSubmit={handleAddComment}>
-						{!userData.imageUrl || userData.imageUrl == 'https://goldfish-app-dv7j2.ondigitalocean.app' ? (
+						{!userData.imageUrl || userData.imageUrl == 'http://localhost:8080' ? (
 							<p></p>
 						) : (
 							<img className={styled.tweetImg} src={userData.imageUrl} alt="#" />
@@ -148,7 +167,7 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 							onChange={(e) => setcommentwriting(e.target.value)}
 						/>
 						<button className={styled.formBtn} type="submit">
-							Post
+							Add
 						</button>
 					</form>
 				</>
@@ -158,16 +177,10 @@ const Post = ({ comments, postId, text, avatarUrl, imageUrl, user, createdAt, is
 				Comments?.map((item) => (
 					<div key={item._id} className={styled.comment}>
 						<div className={styled.commentTitle}>
-							{!item.avatar ||
-							item.avatar === 'https://goldfish-app-dv7j2.ondigitalocean.app' ||
-							item.avatar === 'https://goldfish-app-dv7j2.ondigitalocean.appundefined' ? (
+							{!item.avatar || item.avatar === 'http://localhost:8080' || item.avatar === 'undefined' ? (
 								<img className={styled.tweetImg} src={usera} alt="#" />
 							) : (
-								<img
-									className={styled.tweetImg}
-									src={`https://goldfish-app-dv7j2.ondigitalocean.app${item.avatar}`}
-									alt="#"
-								/>
+								<img className={styled.tweetImg} src={`http://localhost:8080${item.avatar}`} alt="#" />
 							)}
 							<div className={styled.commentSection}>
 								<p className={styled.commentSectionName}>

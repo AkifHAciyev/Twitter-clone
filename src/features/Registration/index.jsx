@@ -57,6 +57,7 @@ const Registration = () => {
 				<TextField
 					className={styles.field}
 					label="E-Mail"
+					type="email"
 					error={Boolean(errors.email?.message)}
 					helperText={errors.email?.message}
 					{...register('email', { required: 'Add Email' })}
@@ -65,6 +66,7 @@ const Registration = () => {
 				<TextField
 					className={styles.field}
 					label="Password"
+					type="password"
 					error={Boolean(errors.password?.message)}
 					helperText={errors.password?.message}
 					{...register('password', { required: 'Add password' })}

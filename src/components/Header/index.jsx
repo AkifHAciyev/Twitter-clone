@@ -68,14 +68,10 @@ const Header = () => {
 					<div className={styled.userWrapper} onClick={() => setDropDown(!dropDown)}>
 						<div className={styled.user}>
 							<div className={styled.userImg}>
-								{!userData.avatarUrl || userData.avatarUrl == 'https://goldfish-app-dv7j2.ondigitalocean.app' ? (
+								{!userData.avatarUrl || userData.avatarUrl == 'http://localhost:8080' ? (
 									<img className={styled.tweetImg} src={user} alt="#" />
 								) : (
-									<img
-										className={styled.tweetImg}
-										src={`https://goldfish-app-dv7j2.ondigitalocean.app${userData.avatarUrl}`}
-										alt="#"
-									/>
+									<img className={styled.tweetImg} src={`http://localhost:8080${userData.avatarUrl}`} alt="#" />
 								)}
 							</div>
 							<p className={styled.userName}>{userData.fullName}</p>

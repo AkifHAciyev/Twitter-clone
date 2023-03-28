@@ -19,8 +19,8 @@ const Login = () => {
 		formState: { errors, isValid },
 	} = useForm({
 		defaultValues: {
-			email: '',
-			password: '',
+			email: 'test@test.ru',
+			password: '12345',
 		},
 		mode: 'onChange',
 	});
@@ -29,6 +29,8 @@ const Login = () => {
 		const data = await dispatch(fetchAuth(values));
 
 		if ('token' in data.payload) {
+			console.log(data);
+
 			window.localStorage.setItem('token', data.payload.token);
 		}
 	};
@@ -46,6 +48,7 @@ const Login = () => {
 				<TextField
 					className={styles.field}
 					label="E-Mail"
+					type="email"
 					error={Boolean(errors.email?.message)}
 					helperText={errors.email?.message}
 					{...register('email', { required: 'Add Email' })}
@@ -54,6 +57,7 @@ const Login = () => {
 				<TextField
 					className={styles.field}
 					label="Password"
+					type="password"
 					error={Boolean(errors.password?.message)}
 					helperText={errors.password?.message}
 					{...register('password', { required: 'Add password' })}

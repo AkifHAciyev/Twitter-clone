@@ -99,6 +99,7 @@ const MyProfile = () => {
 			const { data } = await axios.put(`/users/${userData._id}/bio`, fields);
 			dispatch(fetchAuthMe(data));
 			setBio('');
+			setOpenBio(false);
 		} catch (err) {
 			console.warn(err);
 			alert('bio is not create');
@@ -112,9 +113,9 @@ const MyProfile = () => {
 			<img
 				className={styled.userAvo}
 				src={
-					!userData.coverUrl || userData.coverUrl == 'https://goldfish-app-dv7j2.ondigitalocean.app'
+					!userData.coverUrl || userData.coverUrl == 'http://localhost:8080'
 						? cover
-						: `https://goldfish-app-dv7j2.ondigitalocean.app${userData.coverUrl}`
+						: `http://localhost:8080${userData.coverUrl}`
 				}
 				alt="#"
 				onClick={() => inputRefCover.current.click()}
@@ -131,9 +132,9 @@ const MyProfile = () => {
 					<img
 						className={styled.userInfoImg}
 						src={
-							!userData.avatarUrl || userData.avatarUrl == 'https://goldfish-app-dv7j2.ondigitalocean.app'
+							!userData.avatarUrl || userData.avatarUrl == 'http://localhost:8080'
 								? user
-								: `https://goldfish-app-dv7j2.ondigitalocean.app${userData.avatarUrl}`
+								: `http://localhost:8080${userData.avatarUrl}`
 						}
 						alt="#"
 						onClick={() => inputRefAvo.current.click()}
@@ -172,7 +173,10 @@ const MyProfile = () => {
 					{open && <FollowModal handleClose={handleClose} />}
 				</div>
 			</div>
-			{(isPostsLoading ? [...Array(5)] : [...posts.items].reverse()).map((obj, index) =>
+			{(isPostsLoading
+				? [...Array(5)]
+				: [...posts.items].filter((post) => post.user._id === userData._id).reverse()
+			).map((obj, index) =>
 				isPostsLoading ? (
 					<Post key={index} isLoading={true} />
 				) : (
@@ -180,8 +184,8 @@ const MyProfile = () => {
 						key={obj._id}
 						postId={obj._id}
 						text={obj.text}
-						imageUrl={`https://goldfish-app-dv7j2.ondigitalocean.app${obj.imageUrl}`}
-						avatarUrl={`https://goldfish-app-dv7j2.ondigitalocean.app${obj.user.avatarUrl}`}
+						imageUrl={`http://localhost:8080${obj.imageUrl}`}
+						avatarUrl={`http://localhost:8080${obj.user.avatarUrl}`}
 						user={obj.user}
 						createdAt={obj.createdAt}
 						comments={obj.comments}

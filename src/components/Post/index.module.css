@@ -234,9 +234,9 @@
 	font-style: normal;
 	font-weight: 600;
 	font-size: 12px;
-	line-height: 16px;
 	color: #bdbdbd;
-	margin-right: 20px;
+	margin-right: 5px;
+	cursor: pointer;
 }
 
 .likes p {
