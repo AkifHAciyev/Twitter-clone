@@ -45,14 +45,14 @@ const FollowModal = ({ handleClose }) => {
 	const handleFollow = async (e, userId) => {
 		e.preventDefault();
 		const userDataId = userData._id;
-		const response = await axios.put(`http://localhost:8080/users/following/${userId}`, { userDataId });
+		const response = await axios.put(`https://goldfish-app-dv7j2.ondigitalocean.app/users/following/${userId}`, { userDataId });
 		dispatch(fetchAuthMe(response.data));
 	};
 
 	const handleUnFollow = async (e, userId) => {
 		e.preventDefault();
 		const userDataId = userData._id;
-		const response = await axios.put(`http://localhost:8080/users/unfollowing/${userId}`, { userDataId });
+		const response = await axios.put(`https://goldfish-app-dv7j2.ondigitalocean.app/users/unfollowing/${userId}`, { userDataId });
 		dispatch(fetchAuthMe(response.data));
 	};
 
@@ -101,9 +101,9 @@ const FollowModal = ({ handleClose }) => {
 										<img
 											className={styled.userInfoImg}
 											src={
-												!obj.avatarUrl || obj.avatarUrl == 'http://localhost:8080'
+												!obj.avatarUrl || obj.avatarUrl == 'https://goldfish-app-dv7j2.ondigitalocean.app'
 													? user
-													: `http://localhost:8080${obj.avatarUrl}`
+													: `https://goldfish-app-dv7j2.ondigitalocean.app${obj.avatarUrl}`
 											}
 											alt="#"
 										/>

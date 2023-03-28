@@ -53,7 +53,11 @@ const TweetBox = () => {
 						{!userData.avatarUrl || userData.avatarUrl === '' ? (
 							<img className={styled.userImg} src={user} alt="#" />
 						) : (
-							<img className={styled.userImg} src={`http://localhost:8080${userData.avatarUrl}`} alt="#" />
+							<img
+								className={styled.userImg}
+								src={`https://goldfish-app-dv7j2.ondigitalocean.app${userData.avatarUrl}`}
+								alt="#"
+							/>
 						)}
 
 						<input ref={inputRef} type="file" onChange={handleChangeFile} hidden />
